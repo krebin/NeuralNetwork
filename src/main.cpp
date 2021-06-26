@@ -121,11 +121,11 @@ int main()
             batch_loss = crossent(batch_Y, out);
             loss += batch_loss;
 //
-//            ffn.backward(out - batch_Y);
-//            ffn.optimize(learning_rate);
-//
-//            out = out.squeeze();
-//            out = out.argmax();
+            ffn.backward(out - batch_Y);
+            ffn.optimize(learning_rate);
+
+            out = out.squeeze();
+            out = out.argmax();
 
             float batch_acc = (out == batch_Y_o).sum();
             acc += batch_acc;

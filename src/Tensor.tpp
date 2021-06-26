@@ -546,7 +546,7 @@ Tensor<T> Tensor<T>::clip(T low, T high)
 template<class T>
 Tensor<float> Tensor<T>::operator==(Tensor<T> tensor)
 {
-    float temp[this->_size];
+    float temp[this->_size] = {0};
     for(int i = 0; i < this->_size; i++)
         temp[i] = float(tensor._values[i] == this->_values[i]);
 

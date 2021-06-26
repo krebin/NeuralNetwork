@@ -76,6 +76,7 @@ Tensor<float> Linear::backward(Tensor <float> delta)
 
 Tensor<float> Linear::operator()(Tensor<float> X)
 {
+    delete this->_in;
     this->_in = new Tensor<float>(X);
     return this->forward(X);
 }
