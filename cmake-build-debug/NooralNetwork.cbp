@@ -81,6 +81,12 @@
 		<Unit filename="/home/krebin/CLionProjects/NooralNetwork/Linear.h">
 			<Option target="NooralNetwork"/>
 		</Unit>
+		<Unit filename="/home/krebin/CLionProjects/NooralNetwork/Loss.cpp">
+			<Option target="NooralNetwork"/>
+		</Unit>
+		<Unit filename="/home/krebin/CLionProjects/NooralNetwork/Loss.h">
+			<Option target="NooralNetwork"/>
+		</Unit>
 		<Unit filename="/home/krebin/CLionProjects/NooralNetwork/Network.cpp">
 			<Option target="NooralNetwork"/>
 		</Unit>
