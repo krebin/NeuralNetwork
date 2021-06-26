@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/krebin/CLionProjects/NooralNetwork Select CMakeLists.txt
