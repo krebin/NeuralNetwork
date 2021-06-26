@@ -37,9 +37,7 @@ Linear::~Linear()
 Tensor<float> Linear::forward(Tensor <float> X)
 {
     _in = new Tensor<float>(X);
-//    std::cout << X;
-    return bmm(X, *(this->_weights));
-    // return bmm(X, *(this->_weights)) + *(this->_bias);
+    return bmm(X, *(this->_weights)) + *(this->_bias);
 }
 
 Tensor<float> Linear::backward(Tensor <float> delta)
@@ -49,77 +47,20 @@ Tensor<float> Linear::backward(Tensor <float> delta)
     out_units = delta._dims[2];
     in_units = this->_in->_dims[2];
 
-//    std::cout << "Linear 1" << std::endl;
-//    std::cout << this->_weights->shape();
-//    std::cout << this->_in->shape();
-//    std::cout << "delta 1 " << delta.shape();
-
-
-
     auto delta_r = delta.reshape({batch_size, out_units});
     auto w_r = this->_weights->reshape({in_units, out_units});
     auto x_r = this->_in->reshape({batch_size, in_units});
-
-
-
-//    std::cout << batch_size << " " << in_units << " " << out_units << std::endl;
 
 
     this->_dx = new Tensor<float>(bmm(delta_r.unsqueeze(0), w_r.transpose().unsqueeze(0)).reshape({batch_size,
                                                                                                    1,
                                                                                                    in_units}));
 
-//    std::cout << *(_dx);
-
-
-//    std::cout << x_r.transpose().unsqueeze(1).shape();
-//    std::cout << delta_r.unsqueeze(0).shape();
-//    std::cout << bmm(x_r.transpose().unsqueeze(1),  delta_r).shape() << bmm(x_r.transpose().unsqueeze(1),  delta_r)._size;
-//
-//    std::cout << std::endl;
-
-//    std::cout << *(this->_in);
-
-//    std::cout << x_r.transpose().unsqueeze(1);
-//    std::cout << "---------" << std::endl;
-//    std::cout << delta_r.unsqueeze(0);
-//    assert(4==5);
-
-    this->_dw = new Tensor<float>(bmm(x_r.transpose().unsqueeze(1), delta_r.unsqueeze(0)).reshape({1, in_units, out_units}));
-
-//    std::cout << *(_dw);
+    this->_dw = new Tensor<float>(bmm(x_r.transpose().unsqueeze(1),
+                                      delta_r.unsqueeze(0)).reshape({1, in_units, out_units}));
 
     this->_db = new Tensor<float>(delta.sum(0));
-//    std::cout << *(this->_dw) << std::endl;
-//
-//    assert(4==5);
 
-//    std::cout << delta.shape();
-//    std::cout << this->_db->shape();
-
-//    std::cout << "Linear 2" << std::endl;
-//    std::cout << "delta 2 " << this->_dx->shape();
-//    std::cout << this->_dw->shape();
-//    std::cout << this->_db->shape();
-
-//    std::cout << _dx->shape();
-//
-//    std::cout << delta;
-//    std::cout << "zzzzz" << std::endl;
-//    std::cout << *(this->_db);
-//    assert(5 == 4);
-
-
-//    this->_dw = new Tensor<float>(bmm(this->_in->transpose(), delta));
-//    this->_db = new Tensor<float>(delta.sum(0));
-//
-//    std::cout << "Linear" << std::endl;
-//    std::cout << delta.shape();
-//    std::cout << this->_in->shape();
-//    std::cout << this->_in->squeeze().transpose().shape();
-//    std::cout << this->_in->transpose().shape();
-//    std::cout << this->_dw->shape();
-//    std::cout << this->_db->shape();
 
     return *(this->_dx);
 }
@@ -136,7 +77,4 @@ void Linear::optimize(float lr)
 {
     this->_weights = new Tensor<float>(*(this->_weights) - (*(this->_dw)).clip(-10, 10) * lr);
     this->_bias = new Tensor<float>(*(this->_bias) - (*(this->_db)).clip(-10, 10) * lr);
-
-//    std::cout << *(this->_db);
-//    std::cout << *(this->_weights);
 }

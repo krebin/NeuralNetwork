@@ -2,3 +2,6 @@ cmake-build-debug
 data
 debug.cu
 scratch.cu
+.idea
+ffn
+ffn.d

@@ -236,5 +236,5 @@ class Tensor
 
 // Tensor zeros(std::vector<int> dims);
 
-#include "Tensor.tpp"
+#include "../src/Tensor.tpp"
 #endif //NOORALNETWORK_TENSOR_H

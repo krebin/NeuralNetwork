@@ -1,7 +1,7 @@
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := .
-CC := g++
+CC := nvcc
 
 EXE := $(BIN_DIR)/ffn
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
@@ -16,10 +16,10 @@ LDLIBS   := -lm
 
 all: $(EXE)
 
-$(EXE): $(OBJ) | $(BIN_DIR)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+$(EXE):	$(OBJ) | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 $(BIN_DIR) $(OBJ_DIR):
@@ -28,4 +28,4 @@ $(BIN_DIR) $(OBJ_DIR):
 clean:
 	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
--include $(OBJ:.o=.d)
+#-include $(OBJ:.o=.d)
