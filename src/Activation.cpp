@@ -17,7 +17,6 @@ Activation::~Activation()
 Tensor<float> Activation::forward(Tensor<float> X)
 {
     float temp[X._size];
-    _in = new Tensor<float>(X);
 
     // max(x, 0)
     if (this->activation == "relu")
@@ -73,6 +72,8 @@ Tensor<float> Activation::backward(Tensor<float> delta)
 
 Tensor<float> Activation::operator()(Tensor<float> X)
 {
+    delete this->_in;
+    this->_in = new Tensor<float>(X);
     return this->forward(X);
 }
 

@@ -10,7 +10,7 @@
 
 int main()
 {
-    int num_samp = 60000;
+    int num_samp = 600;
     int num_feat = 28 * 28;
     int num_class = 10;
     std::string train_label_path = "data/train-labels-idx1-ubyte";
@@ -52,6 +52,7 @@ int main()
         Y_i[cls] = 1;
     }
     delete[] images_uchar;
+    delete[] labels_uchar;
 
     Network ffn;
     Loss crossent;
@@ -60,7 +61,7 @@ int main()
 
     batch_size = 200;
     num_batches = num_samp / batch_size;
-    num_epochs = 20;
+    num_epochs = 1;
 
     learning_rate = 0.005;
 
@@ -119,12 +120,12 @@ int main()
 
             batch_loss = crossent(batch_Y, out);
             loss += batch_loss;
-
-            ffn.backward(out - batch_Y);
-            ffn.optimize(learning_rate);
-
-            out = out.squeeze();
-            out = out.argmax();
+//
+//            ffn.backward(out - batch_Y);
+//            ffn.optimize(learning_rate);
+//
+//            out = out.squeeze();
+//            out = out.argmax();
 
             float batch_acc = (out == batch_Y_o).sum();
             acc += batch_acc;
@@ -147,5 +148,11 @@ int main()
         << " Acc: " << acc
         << " Loss: " << loss
         << std::endl;
+    }
+
+    for (int i = 0; i < num_samp; i++)
+    {
+        delete[] X[i];
+        delete[] Y[i];
     }
 }

@@ -13,6 +13,7 @@ class Network
 {
 public:
     Network();
+    ~Network();
     Tensor<float> operator()(Tensor<float> X);
     Tensor<float> forward(Tensor<float> X);
     void backward(Tensor<float> delta);

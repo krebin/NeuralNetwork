@@ -11,7 +11,8 @@
 class Layer
 {
 public:
-    Layer(): _in(NULL), _out(NULL){}
+    Layer(): _in(NULL){}
+    virtual ~Layer() {}
     virtual Tensor<float> forward(Tensor<float> X) = 0;
     virtual Tensor<float> backward(Tensor<float> delta) = 0;
     virtual Tensor<float> operator() (Tensor<float> X) = 0;
@@ -19,7 +20,6 @@ public:
 
 protected:
     Tensor<float> *_in;
-    Tensor<float> *_out;
 };
 
 

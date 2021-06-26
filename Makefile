@@ -1,13 +1,13 @@
 SRC_DIR := src
 OBJ_DIR := obj
-BIN_DIR := .
+BIN_DIR := bin
 CC := nvcc
 
 EXE := $(BIN_DIR)/ffn
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-CPPFLAGS := -Iinclude -MMD -MP
+CPPFLAGS := -Iinclude -MMD -MP -g
 CFLAGS   := -Wall
 LDFLAGS  := -Llib
 LDLIBS   := -lm
