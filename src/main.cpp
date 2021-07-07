@@ -10,7 +10,7 @@
 
 int main()
 {
-    int num_samp = 600;
+    int num_samp = 60000;
     int num_feat = 28 * 28;
     int num_class = 10;
     std::string train_label_path = "data/train-labels-idx1-ubyte";
@@ -61,7 +61,7 @@ int main()
 
     batch_size = 200;
     num_batches = num_samp / batch_size;
-    num_epochs = 1;
+    num_epochs = 15;
 
     learning_rate = 0.005;
 
@@ -120,7 +120,7 @@ int main()
 
             batch_loss = crossent(batch_Y, out);
             loss += batch_loss;
-//
+
             ffn.backward(out - batch_Y);
             ffn.optimize(learning_rate);
 

@@ -9,12 +9,12 @@
 
 Network::Network()
 {
-    this->layers.push_back(new Linear(784, 50));
+//    this->layers.push_back(new Linear(784, 50));
     this->layers.push_back(new Activation("relu"));
-    this->layers.push_back(new Linear(50, 50));
-    this->layers.push_back(new Activation("relu"));
-    this->layers.push_back(new Linear(50, 10));
-    this->layers.push_back(new Activation("softmax"));
+//    this->layers.push_back(new Linear(50, 50));
+//    this->layers.push_back(new Activation("relu"));
+//    this->layers.push_back(new Linear(50, 10));
+//    this->layers.push_back(new Activation("softmax"));
 }
 
 Network::~Network()
@@ -25,6 +25,7 @@ Network::~Network()
 
 Tensor<float> Network::forward(Tensor<float> X)
 {
+    X.del_vals = false;
     for (auto itr = this->layers.begin(); itr < this->layers.end(); ++itr)
         X = (**itr)(X);
 

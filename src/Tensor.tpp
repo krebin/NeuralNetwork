@@ -134,11 +134,10 @@ Tensor<T> bmm(const Tensor<T> &tensor_A, const Tensor<T> &tensor_B)
 }
 
 template<class T>
-Tensor<T>::Tensor(T* vals, const std::vector<int>& dims, int size)
+Tensor<T>::Tensor(T* vals, const std::vector<int>& dims, int size): _dims(dims),
+                                                                    device("cpu"),
+                                                                    del_vals(true)
 {
-    this->_dims = dims;
-    this->device = "cpu";
-
     if (size == -1)
     {
         size = 1;
@@ -148,12 +147,16 @@ Tensor<T>::Tensor(T* vals, const std::vector<int>& dims, int size)
     }
 
     this->_size = size;
+
+
+
     this->_values = allocate_array(vals, this->_size);
 }
 
 template<class T>
 Tensor<T>::Tensor(const Tensor<T> &tensor) : _size(tensor._size),
-                                             _dims(tensor._dims)
+                                             _dims(tensor._dims),
+                                             del_vals(true)
 {
      // Copy values from input tensor and allocate new array
     this->_values = allocate_array(tensor._values, this->_size);
@@ -356,7 +359,7 @@ Tensor<T>::~Tensor()
 }
 
 template<class T>
-Tensor<T> Tensor<T>::operator=(Tensor<T> tensor)
+Tensor<T>& Tensor<T>::operator=(Tensor<T> tensor)
 {
     delete this->_values;
     this->_values = new T[tensor._size];

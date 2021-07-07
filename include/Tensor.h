@@ -83,7 +83,7 @@ class Tensor
          *
          * @return Tensor object with updated values
          */
-        Tensor<T> operator= (Tensor<T> tensor);
+        Tensor<T>& operator= (Tensor<T> tensor);
 
         /**
          * Checks for equality element wise of two tensors
@@ -226,6 +226,8 @@ class Tensor
 
         // True dimensions of the tensor
         std::vector<int> _dims;
+
+        bool del_vals;
 
     private:
         friend class Layer;

@@ -7,7 +7,7 @@ EXE := $(BIN_DIR)/ffn
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-CPPFLAGS := -Iinclude -MMD -MP -g
+CPPFLAGS := -Iinclude -MMD -MP -g -o
 CFLAGS   := -Wall
 LDFLAGS  := -Llib
 LDLIBS   := -lm
