@@ -4,9 +4,8 @@ C++ version of a simple feed forward neural network on MNIST dataset using only 
 
 ### Todo
 
-- [ ] Commenting
+- [x] Commenting
   - [ ] Doxygen
-- [ ] Fix memory leaks
 - [ ] Accelerate computation with CUDA
  
 
@@ -17,3 +16,4 @@ C++ version of a simple feed forward neural network on MNIST dataset using only 
 - [x] Implement Network
 - [x] Implement Backprop
 - [x] Implement Training
+- [x] Fix memory leaks 
