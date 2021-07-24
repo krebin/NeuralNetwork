@@ -70,10 +70,32 @@ class Tensor
          */
         Tensor<T> clip(T low, T high);
 
+        /**
+         * Mean of all elements in tensor
+         *
+         * @return mean of all elements in tensor
+         */
         T mean();
+
+        /**
+         * Sum of all elements in tensor
+         *
+         * @return Sum of all elements in tensor
+         */
         T sum();
+
+        /**
+         * Max index channel wise of tensor
+         *
+         * @return Max index channel wise of tensor
+         */
         Tensor<T> argmax();
 
+        /**
+         * Sum of all elements in one dimension of tensor
+         *
+         * @return Sum of all elements in one dimension of tensor
+         */
         Tensor<T> sum(int dim);
 
         /**
